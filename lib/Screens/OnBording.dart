@@ -65,23 +65,24 @@ class _FlashScreenState extends State<FlashScreen> {
                       width: Get.width,
                       height: Get.height / 16,
                       decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Colors.white54.withOpacity(0.1),
-                              Colors.white24.withOpacity(0.1),
-                              Colors.white54.withOpacity(0.1),
-                            ],
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white.withOpacity(0.2),
-                              offset: const Offset(02, 02),
-                              blurRadius: 3,
-                              spreadRadius: 1,
-                              blurStyle: BlurStyle.inner,
-                            ),
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Colors.white54.withOpacity(0.1),
+                            Colors.white24.withOpacity(0.1),
+                            Colors.white54.withOpacity(0.1),
                           ],
-                          borderRadius: BorderRadius.circular(10)),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.white.withOpacity(0.2),
+                            offset: const Offset(02, 02),
+                            blurRadius: 3,
+                            spreadRadius: 1,
+                            blurStyle: BlurStyle.inner,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
