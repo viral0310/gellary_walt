@@ -40,8 +40,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text('All Gallery Images'),
+          backgroundColor: Colors.black,
+          title: const Text(
+            'Photos',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         body: _storageImages != null
             ? GridView.builder(
@@ -51,17 +56,34 @@ class _MyAppState extends State<MyApp> {
                 ),
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: FileImage(
-                            File(_storageImages!.images![index].imagePath!),
+                    padding: const EdgeInsets.all(8),
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: FileImage(
+                                File(_storageImages!.images![index].imagePath!),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment(0, -1),
+                              end: Alignment(1, 1),
+                              colors: <Color>[
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.85)
+                              ],
+                              stops: <double>[0, 1],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
