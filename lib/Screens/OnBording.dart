@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gellary_walt/Utils.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FlashScreen extends StatefulWidget {
   const FlashScreen({super.key});
@@ -33,6 +34,42 @@ class _FlashScreenState extends State<FlashScreen> {
     },
   ];
 
+  Future<void> _requestStoragePermission() async {
+    final status = await Permission.storage.request();
+
+    if (status.isGranted) {
+      // Permission is granted. You can access storage now.
+      // Perform the actions you need to do with storage here.
+    } else if (status.isDenied) {
+      // Permission is denied. Show an alert dialog to request permission.
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Storage Permission Required'),
+            content: Text(
+                'To use this feature, please allow storage access in the settings.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Open Settings'),
+                onPressed: () {
+                  openAppSettings();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +80,19 @@ class _FlashScreenState extends State<FlashScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 25, left: 20),
-              child: Text(
-                textAlign: TextAlign.start,
-                'Calculator Lock',
-                style: SafeGoogleFont(
-                  'Nexa',
-                  fontSize: Get.height / 30,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xffffffff),
+              child: InkWell(
+                onTap: () {
+                  _requestStoragePermission();
+                },
+                child: Text(
+                  textAlign: TextAlign.start,
+                  'Calculator Lock',
+                  style: SafeGoogleFont(
+                    'Nexa',
+                    fontSize: Get.height / 30,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xffffffff),
+                  ),
                 ),
               ),
             ),
@@ -61,58 +103,63 @@ class _FlashScreenState extends State<FlashScreen> {
                   return Padding(
                     padding:
                         const EdgeInsets.only(top: 16, left: 16, right: 16),
-                    child: Container(
-                      width: Get.width,
-                      height: Get.height / 16,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Colors.white54.withOpacity(0.1),
-                            Colors.white24.withOpacity(0.1),
-                            Colors.white54.withOpacity(0.1),
-                          ],
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.white.withOpacity(0.2),
-                            offset: const Offset(02, 02),
-                            blurRadius: 3,
-                            spreadRadius: 1,
-                            blurStyle: BlurStyle.inner,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/MyHomePage');
+                      },
+                      child: Container(
+                        width: Get.width,
+                        height: Get.height / 16,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Colors.white54.withOpacity(0.1),
+                              Colors.white24.withOpacity(0.1),
+                              Colors.white54.withOpacity(0.1),
+                            ],
                           ),
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.black,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  cardData[index]['icon'],
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withOpacity(0.2),
+                              offset: const Offset(02, 02),
+                              blurRadius: 3,
+                              spreadRadius: 1,
+                              blurStyle: BlurStyle.inner,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.black,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    cardData[index]['icon'],
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              cardData[index]['title'],
-                              style: SafeGoogleFont(
-                                'Nexa',
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xffffffff),
+                              const SizedBox(
+                                width: 20,
                               ),
-                            ), // Fix this line
-                          ],
+                              Text(
+                                cardData[index]['title'],
+                                style: SafeGoogleFont(
+                                  'Nexa',
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xffffffff),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
