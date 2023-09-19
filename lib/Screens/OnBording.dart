@@ -40,10 +40,7 @@ class _FlashScreenState extends State<FlashScreen> {
     final status = await Permission.storage.request();
 
     if (status.isGranted) {
-      // Permission is granted. You can access storage now.
-      // Perform the actions you need to do with storage here.
     } else if (status.isDenied) {
-      // Permission is denied. Show an alert dialog to request permission.
       showDialog(
         context: context,
         builder: (BuildContext context) {

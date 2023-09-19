@@ -51,9 +51,17 @@ class _MyAppState extends State<MyApp> {
                 ),
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.file(
-                      File(_storageImages!.images![index].imagePath!),
+                    padding: const EdgeInsets.all(2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: FileImage(
+                            File(_storageImages!.images![index].imagePath!),
+                          ),
+                        ),
+                      ),
                     ),
                   );
                 },
