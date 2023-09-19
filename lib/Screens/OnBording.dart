@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:gellary_walt/Utils.dart';
 import 'package:get/get.dart';
@@ -46,18 +48,18 @@ class _FlashScreenState extends State<FlashScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Storage Permission Required'),
-            content: Text(
+            title: const Text('Storage Permission Required'),
+            content: const Text(
                 'To use this feature, please allow storage access in the settings.'),
             actions: <Widget>[
               TextButton(
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text('Open Settings'),
+                child: const Text('Open Settings'),
                 onPressed: () {
                   openAppSettings();
                   Navigator.of(context).pop();
