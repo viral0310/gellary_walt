@@ -1,100 +1,60 @@
-// ignore_for_file: use_build_context_synchronously
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gellary_walt/Utils.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-class FlashScreen extends StatefulWidget {
-  const FlashScreen({super.key});
+class FirstScreen extends StatefulWidget {
+  const FirstScreen({super.key});
 
   @override
-  State<FlashScreen> createState() => _FlashScreenState();
+  State<FirstScreen> createState() => _FirstScreenState();
 }
 
-class _FlashScreenState extends State<FlashScreen> {
+class _FirstScreenState extends State<FirstScreen> {
   final List<Map<String, dynamic>> cardData = [
     {
-      'icon': 'assets/images/logo.png',
-      'title': 'Begin the Application',
+      'icon': 'assets/images/image.png',
+      'title': 'Photos',
+      'navigator': '/MyHomePage',
     },
     {
-      'icon': 'assets/images/star.png',
-      'title': 'Give us a Rating',
+      'icon': 'assets/images/file.png',
+      'title': 'Files',
+      'navigator': '',
     },
     {
-      'icon': 'assets/images/Icon.png',
-      'title': 'Privacy Policy',
+      'icon': 'assets/images/video.png',
+      'title': 'Videos',
+      'navigator': '',
     },
     {
-      'icon': 'assets/images/Vector.png',
-      'title': 'Invite Friends',
-    },
-    {
-      'icon': 'assets/images/more.png',
-      'title': 'More Application',
+      'icon': 'assets/images/Group 51.png',
+      'title': 'Downloads',
+      'navigator': '',
     },
   ];
-
-  Future<void> _requestStoragePermission() async {
-    final status = await Permission.storage.request();
-
-    if (status.isGranted) {
-    } else if (status.isDenied) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Storage Permission Required'),
-            content: const Text(
-                'To use this feature, please allow storage access in the settings.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: const Text('Open Settings'),
-                onPressed: () {
-                  openAppSettings();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text(
+          'File Manager',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: InkWell(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: const BackButtonIcon(),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 25, left: 20),
-              child: InkWell(
-                onTap: () {
-                  _requestStoragePermission();
-                },
-                child: Text(
-                  textAlign: TextAlign.start,
-                  'Calculator Lock',
-                  style: SafeGoogleFont(
-                    'Nexa',
-                    fontSize: Get.height / 30,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xffffffff),
-                  ),
-                ),
-              ),
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: cardData.length,
@@ -104,7 +64,8 @@ class _FlashScreenState extends State<FlashScreen> {
                         const EdgeInsets.only(top: 16, left: 16, right: 16),
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/FirstScreen');
+                        Navigator.of(context)
+                            .pushNamed(cardData[index]['navigator']);
                       },
                       child: Container(
                         width: Get.width,
@@ -143,6 +104,7 @@ class _FlashScreenState extends State<FlashScreen> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Image.asset(
                                     cardData[index]['icon'],
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -167,6 +129,49 @@ class _FlashScreenState extends State<FlashScreen> {
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: GradientFAB(
+        onPressed: () {},
+      ),
+    );
+  }
+}
+
+class GradientFAB extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  GradientFAB({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 56.0,
+      height: 56.0,
+      child: RawMaterialButton(
+        onPressed: onPressed,
+        elevation: 2.0,
+        fillColor: Colors.transparent, // Set the FAB color to transparent
+        shape: const CircleBorder(),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [
+                Color(0xffF2A501),
+                Color(0xffFF7E00)
+              ], // Define your gradient colors
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(28.0),
+          ),
+          child: const Center(
+            child: Icon(
+              CupertinoIcons.plus,
+              color: Colors.white,
+              size: 35,
+            ),
+          ),
         ),
       ),
     );

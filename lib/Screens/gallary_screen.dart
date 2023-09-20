@@ -47,68 +47,65 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     print("fari thi tahyu...");
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Text(
-            'Photos',
-            style: TextStyle(color: Colors.white),
-          ),
-          leading: InkWell(
-            onTap: () {
-              clearImages();
-              Navigator.of(context).pop();
-            },
-            child: const BackButtonIcon(),
-          ),
+        title: const Text(
+          'Photos',
+          style: TextStyle(color: Colors.white),
         ),
-        body: _storageImages != null
-            ? GridView.builder(
-                itemCount: _storageImages!.images!.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: FileImage(
-                                File(_storageImages!.images![index].imagePath!),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: const Alignment(0, -1),
-                              end: const Alignment(1, 1),
-                              colors: <Color>[
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.85)
-                              ],
-                              stops: const <double>[0, 1],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              ),
+        leading: InkWell(
+          onTap: () {
+            clearImages();
+            Navigator.of(context).pop();
+          },
+          child: const BackButtonIcon(),
+        ),
       ),
+      body: _storageImages != null
+          ? GridView.builder(
+              itemCount: _storageImages!.images!.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: FileImage(
+                              File(_storageImages!.images![index].imagePath!),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: const Alignment(0, -1),
+                            end: const Alignment(1, 1),
+                            colors: <Color>[
+                              Colors.transparent,
+                              Colors.black.withOpacity(0.85)
+                            ],
+                            stops: const <double>[0, 1],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }
