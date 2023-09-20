@@ -17,7 +17,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    getImagesFromGallery();
+    if (_storageImages == null) {
+      getImagesFromGallery();
+    }
   }
 
   Future<void> getImagesFromGallery() async {
@@ -35,8 +37,16 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void clearImages() {
+    setState(() {
+      _storageImages = null;
+      print(_storageImages.toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("fari thi tahyu...");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -46,6 +56,13 @@ class _MyAppState extends State<MyApp> {
           title: const Text(
             'Photos',
             style: TextStyle(color: Colors.white),
+          ),
+          leading: InkWell(
+            onTap: () {
+              clearImages();
+              Navigator.of(context).pop();
+            },
+            child: const BackButtonIcon(),
           ),
         ),
         body: _storageImages != null
@@ -73,13 +90,13 @@ class _MyAppState extends State<MyApp> {
                         Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              begin: Alignment(0, -1),
-                              end: Alignment(1, 1),
+                              begin: const Alignment(0, -1),
+                              end: const Alignment(1, 1),
                               colors: <Color>[
                                 Colors.transparent,
                                 Colors.black.withOpacity(0.85)
                               ],
-                              stops: <double>[0, 1],
+                              stops: const <double>[0, 1],
                             ),
                           ),
                         ),
@@ -88,7 +105,9 @@ class _MyAppState extends State<MyApp> {
                   );
                 },
               )
-            : const Center(child: CircularProgressIndicator()),
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
   }
