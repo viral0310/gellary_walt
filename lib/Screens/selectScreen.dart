@@ -151,15 +151,15 @@ class GradientFAB extends StatelessWidget {
       child: RawMaterialButton(
         onPressed: onPressed,
         elevation: 2.0,
-        fillColor: Colors.transparent, // Set the FAB color to transparent
+        fillColor: Colors.transparent,
         shape: const CircleBorder(),
         child: Container(
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               colors: [
                 Color(0xffF2A501),
-                Color(0xffFF7E00)
-              ], // Define your gradient colors
+                Color(0xffFF7E00),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
