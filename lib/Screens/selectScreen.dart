@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gellary_walt/Utils.dart';
 import 'package:get/get.dart';
 
@@ -131,48 +132,97 @@ class _FirstScreenState extends State<FirstScreen> {
           ],
         ),
       ),
-      floatingActionButton: GradientFAB(
-        onPressed: () {},
-      ),
+      floatingActionButton: const MySpeedDial(),
     );
   }
 }
 
-class GradientFAB extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  GradientFAB({required this.onPressed});
+class MySpeedDial extends StatelessWidget {
+  const MySpeedDial({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 56.0,
       height: 56.0,
-      child: RawMaterialButton(
-        onPressed: onPressed,
-        elevation: 2.0,
-        fillColor: Colors.transparent,
-        shape: const CircleBorder(),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Color(0xffF2A501),
-                Color(0xffFF7E00),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(28.0),
-          ),
-          child: const Center(
-            child: Icon(
-              CupertinoIcons.plus,
-              color: Colors.white,
-              size: 35,
-            ),
-          ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xffFF7E00),
+            Color(0xffF2A501),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
+      ),
+      child: SpeedDial(
+        activeIcon: Icons.close,
+        animatedIconTheme: const IconThemeData(size: 22.0),
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        elevation: 0,
+        overlayOpacity: 0.5,
+        backgroundColor: Colors.transparent,
+        children: [
+          SpeedDialChild(
+            child: const Icon(
+              Icons.photo,
+              color: Color(0xffF2A501),
+            ),
+            backgroundColor: Colors.white,
+            labelWidget: const Text(
+              'Photos    ',
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            onTap: () {
+              // Handle take photo action
+            },
+          ),
+          SpeedDialChild(
+            child: const Icon(
+              Icons.video_library_rounded,
+              color: Color(0xffF2A501),
+            ),
+            backgroundColor: Colors.white,
+            labelWidget: const Text(
+              'Videos    ',
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            onTap: () {
+              // Handle take photo action
+            },
+          ),
+          SpeedDialChild(
+            child: const Icon(
+              Icons.file_copy_rounded,
+              color: Color(0xffF2A501),
+            ),
+            backgroundColor: Colors.white,
+            labelWidget: const Text(
+              'Files    ',
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            onTap: () {
+              // Handle choose from gallery action
+            },
+          ),
+          SpeedDialChild(
+            child: const Icon(
+              Icons.camera,
+              color: Color(0xffF2A501),
+            ),
+            backgroundColor: Colors.white,
+            labelWidget: const Text(
+              'Camera    ',
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            onTap: () {
+              // Handle take photo action
+            },
+          ),
+        ],
+        child: const Icon(CupertinoIcons.plus),
       ),
     );
   }
