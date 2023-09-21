@@ -40,6 +40,8 @@ dependencies:
   all_gallery_images: ^0.1.0+1
   permission_handler: ^11.0.0
   flutter_speed_dial: ^7.0.0
+  form_builder_file_picker: ^4.1.0
+  video_player:
 
 dev_dependencies:
   flutter_test:

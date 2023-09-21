@@ -26,7 +26,7 @@ class _FirstScreenState extends State<FirstScreen> {
     {
       'icon': 'assets/images/video.png',
       'title': 'Videos',
-      'navigator': '',
+      'navigator': '/VideoScreen',
     },
     {
       'icon': 'assets/images/Group 51.png',
@@ -149,8 +149,8 @@ class MySpeedDial extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
         gradient: const LinearGradient(
           colors: [
-            Color(0xffFF7E00),
             Color(0xffF2A501),
+            Color(0xffFF7E00),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -176,7 +176,7 @@ class MySpeedDial extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             onTap: () {
-              // Handle take photo action
+              // Handle take photos action
             },
           ),
           SpeedDialChild(
@@ -190,7 +190,7 @@ class MySpeedDial extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             onTap: () {
-              // Handle take photo action
+              // Handle take video action
             },
           ),
           SpeedDialChild(
@@ -204,7 +204,7 @@ class MySpeedDial extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             onTap: () {
-              // Handle choose from gallery action
+              // Handle choose from file action
             },
           ),
           SpeedDialChild(

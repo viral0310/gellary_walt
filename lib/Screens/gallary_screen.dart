@@ -104,7 +104,9 @@ class _MyAppState extends State<MyApp> {
               },
             )
           : const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Color(0xffFF7E00),
+              ),
             ),
     );
   }
