@@ -42,6 +42,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   form_builder_file_picker: ^4.1.0
   video_player:
+  path_provider:
 
 dev_dependencies:
   flutter_test:
