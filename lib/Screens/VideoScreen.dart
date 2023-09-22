@@ -3,6 +3,8 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gellary_walt/Utils.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
@@ -58,6 +60,39 @@ class _VideoScreenState extends State<VideoScreen> {
           'Videos',
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                width: 92,
+                height: 84,
+                margin: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xff060606),
+                      Color(0xff13171A),
+                    ],
+                    begin: Alignment.center,
+                    end: Alignment.center,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'Select',
+                    style: TextStyle(
+                      fontSize: Get.height / 45,
+                      color: const Color(0xffffffff),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
