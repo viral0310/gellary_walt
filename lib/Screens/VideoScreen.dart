@@ -3,7 +3,6 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gellary_walt/Utils.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,6 +23,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void initState() {
     super.initState();
+    _controller = VideoPlayerController.asset('');
     _getVideoFiles();
   }
 
@@ -130,10 +130,15 @@ class _VideoScreenState extends State<VideoScreen> {
 
   Future<void> _initializeAndPlayVideo(FileSystemEntity file) async {
     if (_controller.value.isInitialized) {
-      await _controller.dispose();
+      await _controller.pause();
+      await _controller.seekTo(const Duration(seconds: 0));
+    } else {
+      _controller = VideoPlayerController.file(
+        File(file.path),
+      );
+      await _controller.initialize();
     }
-    _controller = VideoPlayerController.file(File(file.path));
-    await _controller.initialize();
+
     await _controller.play();
     setState(() {});
   }
