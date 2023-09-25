@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:all_gallery_images/model/StorageImages.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:all_gallery_images/all_gallery_images.dart';
+import 'package:get/get.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -40,13 +42,17 @@ class _MyAppState extends State<MyApp> {
   void clearImages() {
     setState(() {
       _storageImages = null;
-      print(_storageImages.toString());
+      if (kDebugMode) {
+        print(_storageImages.toString());
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("fari thi tahyu...");
+    if (kDebugMode) {
+      print("fari thi tahyu...");
+    }
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -62,6 +68,40 @@ class _MyAppState extends State<MyApp> {
           },
           child: const BackButtonIcon(),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                width: 92,
+                height: 84,
+                margin: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xff060606),
+                      Color(0xff13171A),
+                    ],
+                    begin: Alignment.center,
+                    end: Alignment.center,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'Select',
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: Get.height / 45,
+                      color: const Color(0xffffffff),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: _storageImages != null
           ? GridView.builder(
